@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111318">
+<title>מרכז הסוכנים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+[hidden]{display:none!important}
+.typing{opacity:.7;font-style:italic}
+.m time{display:block;font-size:11px;color:var(--mut);margin-top:4px}
+</style>
+</head>
+<body>
+<div id="login"><form class="box" id="lf">
+<h1 style="margin:0">מרכז הסוכנים</h1>
+<label for="u" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">שם משתמש</label>
+<input id="u" placeholder="שם משתמש" autocomplete="username" dir="ltr">
+<label for="p" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">סיסמה</label>
+<input id="p" type="password" placeholder="סיסמה" autocomplete="current-password" dir="ltr">
+<div class="err" id="le"></div>
+<button class="btn" id="lb" type="submit">כניסה</button>
+</form></div>
+
+<div id="app">
+<nav id="rail" aria-label="צוות">
+<div class="rh"><h1>מרכז הסוכנים</h1><button class="ib" id="thm" aria-label="החלפת מצב כהה ובהיר"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button></div>
+<button class="nav on" id="homeb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span>מסך בוקר</span></button>
+<div class="lbl">העובדים שלי</div>
+<div class="grid" id="grid"></div>
+<p class="ver">גרסת ענן · שלב 1</p>
+</nav>
+<div id="right">
+<div id="empty">
+<div class="hhd"><div><h2 id="hgreet">בוקר טוב, שחר</h2><p id="hdate"></p></div></div>
+<div class="err" id="nokey" hidden>המפתח של Claude API לא הוגדר בשרת, ולכן הסוכנים לא יכולים לענות. מוסיפים אותו בהגדרות השרת ב-Render, תחת Environment.</div>
+<form class="qbar" id="qf"><label for="qa" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">בקשה לצוות</label><input id="qa" placeholder="למי ומה? למשל: קרלי, תסכמי לי מה מחכה לי השבוע" autocomplete="off"><button class="btn" type="submit" style="min-height:44px;padding:0 22px">שליחה</button></form>
+<div class="qhint" id="qh"></div>
+<section class="sec"><h3>מחכה לאישור שלך <span id="hac"></span></h3><div class="cards" id="hApv"></div></section>
+<div class="two">
+<section class="sec panelc" style="flex:3 1 460px;min-width:0"><h3>משימות מחזוריות – היום</h3><div id="hRec"></div></section>
+<div style="flex:2 1 300px;min-width:0;display:flex;flex-direction:column;gap:24px">
+<section class="sec panelc"><h3>סטטוס הצוות</h3><div id="hTeam"></div></section>
+<section class="sec panelc"><h3>מה בוצע מאז אתמול</h3><ul class="dl" id="hDone"></ul></section>
+</div></div>
+</div>
+<div id="panel">
+<div class="hd"><img id="pimg" alt=""><div class="hn"><b id="pn"></b><small id="pr"></small></div><button class="btn alt sm" id="clr" style="margin:0">נקה צ'אט</button></div>
+<div class="tabs"><button class="tab on" data-t="chat">צ'אט ופקודות</button><button class="tab" data-t="tasks">משימות וסטטוס</button></div>
+<div class="pane on" id="chat"><div class="list" id="msgs"></div>
+<div id="dbg" style="padding:4px 14px;font-size:12px;color:var(--mut);border-top:1px solid var(--line)">מוכן</div>
+<div class="row"><label for="mi" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">הודעה</label><textarea id="mi" placeholder="כתוב פקודה... (התחל ב'משימה:' ליצירת משימה)"></textarea><button class="btn" id="ms">שלח</button></div></div>
+<div class="pane" id="tasks"><div class="row" style="border:0;border-bottom:1px solid var(--line);flex-direction:column">
+<label for="tt" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">נושא</label><input id="tt" placeholder="נושא המשימה">
+<label for="td" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">תיאור</label><input id="td" placeholder="מה היא עושה (שורה אחת)">
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:14px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="trec" style="width:auto"> משימה חוזרת (רצה אוטומטית)</label><label style="display:flex;gap:6px;align-items:center">שעה <input type="time" id="ttime" value="08:00" style="width:auto;padding:6px"></label><label style="display:flex;gap:6px;align-items:center">בתוקף עד <input type="date" id="tuntil" style="width:auto;padding:6px"></label></div><button class="btn" id="ts">הוסף משימה</button></div><div class="list" id="tl"></div></div>
+</div></div></div>
+<script src="app.js"></script>
+</body>
+</html>

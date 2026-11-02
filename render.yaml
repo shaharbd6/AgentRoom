@@ -1,0 +1,33 @@
+# הגדרת השרת ב-Render (Blueprint). Render קורא את הקובץ הזה ויוצר את השירות.
+services:
+  - type: web
+    name: agentroom
+    runtime: node
+    rootDir: server
+    plan: starter
+    region: frankfurt
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    disk:
+      name: agentroom-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TZ
+        value: Asia/Jerusalem
+      - key: DATA_DIR
+        value: /var/data
+      - key: MODEL
+        value: claude-haiku-5-5
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: APP_USER
+        sync: false
+      - key: APP_PASSWORD
+        sync: false

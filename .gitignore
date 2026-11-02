@@ -17,3 +17,6 @@ bridge-log.txt
 
 # קיצורי דרך של Windows
 *.lnk
+
+# נתוני השרת המקומיים (בענן הם נשמרים בדיסק של Render)
+server/data/
